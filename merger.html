@@ -36,7 +36,9 @@
 <body>
 	<h1> Dylan Snyder builds a merger</h1>
 	<input type="text" id="textInput" placeholder="Enter text">
+	<button onclick="addFront()">Add front</button>
 	<button onclick="addElement()">Add end</button>
+	<button onclick="remove()">Remove</button>
 	<div class="flex-container" id="target">
 		<div class="merger">Item 1</div>
 		<div class="merger">Item 2</div>
@@ -53,6 +55,26 @@
 		newElement.className = "merger";
 
 		document.getElementById('target').appendChild(newElement);
+	}
+
+	function remove() {
+		var mergerItems = document.getElementsByClassName("merger");
+		var length = mergerItems.length;
+		if (length > 0) {
+			document.getElementById('target').removeChild(mergerItems[Math.floor(length/2)]);
+		}
+	}
+
+	function addFront() {
+		var inputValue = document.getElementById('textInput').value;
+		var newElement = document.createElement('div');
+
+		newElement.innerHTML = inputValue;
+		newElement.className = "merger";
+
+		var container = document.getElementById('target');
+
+		container.insertBefore(newElement, container.firstChild);
 	}
 
 </script>
