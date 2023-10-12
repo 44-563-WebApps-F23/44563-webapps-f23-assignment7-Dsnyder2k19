@@ -9,6 +9,67 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <script>
+        var ids = ["image0","image1","image2","image3","image4","image5","image6","image7","image8","image9","image10","image11","image12","image13","image14","image15","image16","image17","image18","image19","image20","image21","image22","image23","image24"]
+        var checkCount = 0;
+        var Penalty = 0;
+        var lastCheck = 0;
+        var treasureLocation = 5;
+        var trapLocation = 18;
+        var GameOver = false;
+
+        function check(position) {
+            if (GameOver) {
+                return;
+            }
+            var imageId = ids[position];
+            var imageElement = document.getElementById(imageId);
+
+            if (position === treasureLocation) {
+                imageElement.src = "Treasure.png";
+                GameOver = true;
+                Penalty -= 3;
+            } else if (position === trapLocation){
+                imageElement.src = "Mimic.png";
+                GameOver = true;
+                Penalty += 4;
+            } else {
+                imageElement.src = "Pirate.png";
+            }
+
+            checkCount ++;
+            Penalty ++;
+            document.getElementById("locations").textContent = "Number of locations checked is " + checkCount;
+            document.getElementById("penalty").textContent = "Penalty is " + Penalty;
+            lastCheck = position;
+        }
+
+        function help() {
+            if (GameOver) {
+                return;
+            }
+            var row = Math.floor(lastCheck / 5);
+            var col = lastCheck % 5;
+            var treasureRow = Math.floor(treasureLocation / 5);
+            var treasureCol = treasureLocation % 5;
+            var rowDiff = Math.abs(row - treasureRow);
+            var colDiff = Math.abs(col - treasureCol);
+
+            if ((rowDiff <= 1 && colDiff <= 1) && !(rowDiff == 1 && colDiff == 1)){
+                document.getElementById("help").textContent = "Can smell it";
+                Penalty += 2;
+            } else if (rowDiff + colDiff === 2){
+                document.getElementById("help").textContent = "Close Matie";
+                Penalty += 2;
+            } else {
+                document.getElementById("help").textContent = "Step Faster";
+            }
+            document.getElementById("penalty").textContent = "Penalty is " + Penalty;
+
+        }
+
+    </script>
+
     <div class="container mt-4">
         <h1 class="text-center">Find the treasure by Dylan Snyder</h1>
         <p class="text-center" style="font-size: 20px; color:blueviolet;">Click on the locations to search for treasure, beware of traps</p>
@@ -16,92 +77,92 @@
         
         <div class="row">
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image0" src="Location.png" width ="200" height="200" alt="Location 0" onclick="check(0)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image1" src="Location.png" width ="200" height="200" alt="Location 1" onclick="check(1)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image2" src="Location.png" width ="200" height="200" alt="Location 2" onclick="check(2)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image3"src="Location.png" width ="200" height="200" alt="Location 3" onclick="check(3)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image4" src="Location.png" width ="200" height="200" alt="Location 4" onclick="check(4)">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image5" src="Location.png" width ="200" height="200" alt="Location 5" onclick="check(5)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image6" src="Location.png" width ="200" height="200" alt="Location 6" onclick="check(6)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image7" src="Location.png" width ="200" height="200" alt="Location 7" onclick="check(7)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image8" src="Location.png" width ="200" height="200" alt="Location 8" onclick="check(8)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
-            </div>
-            <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image9" src="Location.png" width ="200" height="200" alt="Location 9" onclick="check(9)">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image10" src="Location.png" width ="200" height="200" alt="Location 10" onclick="check(10)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image11" src="Location.png" width ="200" height="200" alt="Location 11" onclick="check(11)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image12" src="Location.png" width ="200" height="200" alt="Location 12" onclick="check(12)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image13" src="Location.png" width ="200" height="200" alt="Location 13" onclick="check(13)">
             </div>
             <div class="col-sm-2 locations">
-                <img src="Location.png" width ="200" height="200" alt="Starting Location">
+                <img id="image14" src="Location.png" width ="200" height="200" alt="Location 14" onclick="check(14)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 locations">
+                <img id="image15" src="Location.png" width ="200" height="200" alt="Location 15" onclick="check(15)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image16" src="Location.png" width ="200" height="200" alt="Location 16" onclick="check(16)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image17" src="Location.png" width ="200" height="200" alt="Location 17" onclick="check(17)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image18" src="Location.png" width ="200" height="200" alt="Location 18" onclick="check(18)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image19" src="Location.png" width ="200" height="200" alt="Location 19" onclick="check(19)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2 locations">
+                <img id="image20" src="Location.png" width ="200" height="200" alt="Location 20" onclick="check(20)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image21" src="Location.png" width ="200" height="200" alt="Location 21" onclick="check(21)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image22" src="Location.png" width ="200" height="200" alt="Location 22" onclick="check(22)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image23" src="Location.png" width ="200" height="200" alt="Location 23" onclick="check(23)">
+            </div>
+            <div class="col-sm-2 locations">
+                <img id="image24" src="Location.png" width ="200" height="200" alt="Location 24" onclick="check(24)">
             </div>
         </div>
         
         <p id="penalty" class="font-weight-bold">Penalty is zero</p>
-        <p class="text-center">Click for help</p>
+        <p class="text-center" onclick="help()">Click for help</p>
         <p id="help" class="font-weight-bold">Help report</p>
     </div>
 </body>
